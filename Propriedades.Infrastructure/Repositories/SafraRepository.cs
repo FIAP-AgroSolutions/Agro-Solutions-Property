@@ -5,10 +5,10 @@ using Propriedades.Infrastructure.Data;
 
 namespace Propriedades.Infrastructure.Repositories
 {
-    public class PropriedadeRepository : BaseRepository<Propriedade>, IPropriedadeRepository
+    public class SafraRepository : BaseRepository<Safra>, ISafraRepository
     {
-        public PropriedadeRepository(PropriedadesDbContext context,
-            ILogger<BaseRepository<Propriedade>> logger)
+        public SafraRepository(PropriedadesDbContext context,
+            ILogger<BaseRepository<Safra>> logger)
             : base(context, logger)
         {
         }

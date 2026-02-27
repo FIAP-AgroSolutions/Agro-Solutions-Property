@@ -7,24 +7,23 @@ namespace Propriedades.Api.Controllers
     [ApiController]
     //[Authorize]
     [Route("api/[controller]")]
-    public class TalhaoSafraCulturaController : BaseController
+    public class SafraController : BaseController
     {
-        private readonly ITalhaoSafraCulturaService _talhaoSafraCulturaService;
-        private readonly ILogger<TalhaoSafraCulturaController> _logger;
+        private readonly ISafraService _safraService;
+        private readonly ILogger<SafraController> _logger;
 
-        public TalhaoSafraCulturaController(ITalhaoSafraCulturaService propriedadeService,
-            ILogger<TalhaoSafraCulturaController> logger)
+        public SafraController(ISafraService safraService, ILogger<SafraController> logger)
         {
-            _talhaoSafraCulturaService = propriedadeService;
+            _safraService = safraService;
             _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TalhaoSafraCulturaResponse>>> GetAll()
+        public async Task<ActionResult<List<SafraResponse>>> GetAll()
         {
             try
             {
-                var result = await _talhaoSafraCulturaService.GetAllAsync();
+                var result = await _safraService.GetAllAsync();
 
                 if (result is not null)
                 {
@@ -35,17 +34,17 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching propriedade.");
+                _logger.LogError(ex, "Error fetching safra.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
-        [HttpGet("{talhaoSafraCulturaId}")]
-        public async Task<ActionResult<List<TalhaoSafraCulturaResponse>>> GetById(Guid talhaoSafraCulturaId)
+        [HttpGet("{propriedadeId}")]
+        public async Task<ActionResult<List<SafraResponse>>> GetById(Guid propriedadeId)
         {
             try
             {
-                var result = await _talhaoSafraCulturaService.GetByIdAsync(talhaoSafraCulturaId);
+                var result = await _safraService.GetByIdAsync(propriedadeId);
 
                 if (result is not null)
                 {
@@ -56,13 +55,13 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching propriedade.");
+                _logger.LogError(ex, "Error fetching safra.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult<TalhaoSafraCulturaResponse>> Add([FromBody] CreateTalhaoSafraCulturaRequest request)
+        public async Task<ActionResult<SafraResponse>> Add([FromBody] CreateSafraRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +70,7 @@ namespace Propriedades.Api.Controllers
 
             try
             {
-                var result = await _talhaoSafraCulturaService.AddAsync(request);
+                var result = await _safraService.AddAsync(request);
 
                 if (result is not null)
                 {
@@ -82,13 +81,13 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing propriedade add.");
+                _logger.LogError(ex, "Error processing safra add.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
         [HttpPut]
-        public async Task<ActionResult<TalhaoSafraCulturaResponse>> Update([FromBody] UpdateTalhaoSafraCulturaRequest request)
+        public async Task<ActionResult<SafraResponse>> Update([FromBody] UpdateSafraRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +96,7 @@ namespace Propriedades.Api.Controllers
 
             try
             {
-                var result = await _talhaoSafraCulturaService.UpdateAsync(request);
+                var result = await _safraService.UpdateAsync(request);
 
                 if (result is not null)
                 {
@@ -108,23 +107,23 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing propriedade update.");
+                _logger.LogError(ex, "Error processing safra update.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
-        [HttpDelete("{talhaoSafraCulturaId}")]
-        public async Task<ActionResult> Delete(Guid talhaoSafraCulturaId)
+        [HttpDelete("{propriedadeId}")]
+        public async Task<ActionResult> Delete(Guid propriedadeId)
         {
             try
             {
-                await _talhaoSafraCulturaService.DeleteAsync(talhaoSafraCulturaId);
+                await _safraService.DeleteAsync(propriedadeId);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing propriedade delete.");
+                _logger.LogError(ex, "Error processing safra delete.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }

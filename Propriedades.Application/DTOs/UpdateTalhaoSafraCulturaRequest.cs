@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Propriedades.Application.DTOs
+﻿namespace Propriedades.Application.DTOs
 {
     public class UpdateTalhaoSafraCulturaRequest
     {
