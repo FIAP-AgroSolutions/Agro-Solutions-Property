@@ -9,12 +9,13 @@ namespace Propriedades.Application.Interfaces
 {
     public interface ITalhaoService
     {
-        Task<TalhaoResponse> GetByIdAsync(string talhaoId);
-        Task<TalhaoResponse> AddAsync(TalhaoRequest request);
-        Task<TalhaoResponse> UpdateAsync(TalhaoRequest request);
-        Task<DeleteResponse> DeleteAsync(string talhaoId);
-        Task<DeleteResponse> AddCulturaSafraAsync(string talhaoId);
-        Task<DeleteResponse> UpdateCulturaSafraAsync(string talhaoId);
-        Task<DeleteResponse> DeleteCulturaSafraAsync(string culturaSafraId);
+        Task<List<TalhaoResponse>> GetAllAsync();
+        Task<TalhaoResponse> GetByIdAsync(Guid talhaoId);
+        Task<TalhaoResponse> AddAsync(CreateTalhaoRequest request);
+        Task<TalhaoResponse> UpdateAsync(UpdateTalhaoRequest request);
+        Task DeleteAsync(Guid talhaoId);
+        Task<DeleteResponse> AddCulturaSafraAsync(Guid talhaoId);
+        Task<DeleteResponse> UpdateCulturaSafraAsync(Guid talhaoId);
+        Task<DeleteResponse> DeleteCulturaSafraAsync(Guid culturaSafraId);
     }
 }

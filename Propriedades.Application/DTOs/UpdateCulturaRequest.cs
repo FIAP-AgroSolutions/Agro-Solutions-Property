@@ -1,14 +1,12 @@
 ﻿using Propriedades.Domain.Enums;
 
-namespace Propriedades.Domain.Entities
+namespace Propriedades.Application.DTOs
 {
-    public class Cultura
+    public class UpdateCulturaRequest
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public TipoCultura Tipo { get; set; }
         public int CicloDias { get; set; }
-
-        public ICollection<TalhaoSafraCultura> TalhoesSafra { get; set; }
     }
 }

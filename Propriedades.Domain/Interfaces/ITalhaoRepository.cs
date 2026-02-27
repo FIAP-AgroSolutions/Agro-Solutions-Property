@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Propriedades.Domain.Entities;
 
 namespace Propriedades.Domain.Interfaces
 {
-    public interface ITalhaoRepository
+    public interface ITalhaoRepository : IRepository<Talhao>
     {
     }
 }

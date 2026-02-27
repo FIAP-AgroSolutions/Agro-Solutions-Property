@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Propriedades.Application.DTOs;
 using Propriedades.Application.Interfaces;
 
@@ -13,10 +12,31 @@ namespace Propriedades.Api.Controllers
         private readonly IPropriedadeService _propriedadeService;
         private readonly ILogger<PropriedadeController> _logger;
 
-        public PropriedadeController(IPropriedadeService propriedadeService, ILogger<PropriedadeController> _logger)
+        public PropriedadeController(IPropriedadeService propriedadeService, ILogger<PropriedadeController> logger)
         {
             _propriedadeService = propriedadeService;
-            _propriedadeService = propriedadeService;
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<PropriedadeResponse>>> GetAll()
+        {
+            try
+            {
+                var result = await _propriedadeService.GetAllAsync();
+
+                if (result is not null)
+                {
+                    return Ok(result);
+                }
+
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching propriedade.");
+                return StatusCode(500, "An error occurred while processing your request");
+            }
         }
 
         [HttpGet("{propriedadeId}")]

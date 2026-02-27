@@ -3,11 +3,6 @@ using Propriedades.Application.DTOs;
 using Propriedades.Application.Extensions;
 using Propriedades.Application.Interfaces;
 using Propriedades.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Propriedades.Application.Services
 {
@@ -20,6 +15,13 @@ namespace Propriedades.Application.Services
         {
             _logger = logger;
             _propriedadeRepository = propriedadeRepository;
+        }
+
+        public async Task<List<PropriedadeResponse>> GetAllAsync()
+        {
+            var propriedades = await _propriedadeRepository.GetAllAsync();
+            
+            return propriedades.Select(x => x.ToPropriedadeResponse()).ToList();
         }
 
         public async Task<PropriedadeResponse> GetByIdAsync(Guid propriedadeId)
@@ -59,5 +61,6 @@ namespace Propriedades.Application.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }

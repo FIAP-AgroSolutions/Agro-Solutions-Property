@@ -58,9 +58,13 @@ builder.Services.AddDbContext<PropriedadesDbContext>(options =>
 
 // Repositories
 builder.Services.AddScoped<IPropriedadeRepository, PropriedadeRepository>();
+builder.Services.AddScoped<ITalhaoRepository, TalhaoRepository>();
+builder.Services.AddScoped<ICulturaRepository, CulturaRepository>();
 
 // Services
 builder.Services.AddScoped<IPropriedadeService, PropriedadeService>();
+builder.Services.AddScoped<ITalhaoService, TalhaoService>();
+builder.Services.AddScoped<ICulturaService, CulturaService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

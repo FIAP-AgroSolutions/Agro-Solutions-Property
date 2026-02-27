@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Propriedades.Application.DTOs
+﻿namespace Propriedades.Application.DTOs
 {
-    public class TalhaoResponse
+    public class CreateTalhaoRequest
     {
-        public Guid Id { get; set; }
-
         public string Nome { get; set; }
         public string Codigo { get; set; }
         public int Status { get; set; }

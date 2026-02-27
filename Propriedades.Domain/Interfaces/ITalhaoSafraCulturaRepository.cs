@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Propriedades.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Propriedades.Domain.Interfaces
 {
-    public interface ITalhaoSafraRepository
+    public interface ITalhaoSafraCulturaRepository : IRepository<TalhaoSafraCultura>
     {
     }
 }

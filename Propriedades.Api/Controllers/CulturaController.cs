@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Propriedades.Application.DTOs;
 using Propriedades.Application.Interfaces;
 using Propriedades.Application.Services;
@@ -9,23 +8,23 @@ namespace Propriedades.Api.Controllers
     [ApiController]
     //[Authorize]
     [Route("api/[controller]")]
-    public class TalhaoController : Controller
+    public class CulturaController : BaseController
     {
-        private readonly ITalhaoService _talhaoService;
-        private readonly ILogger<PropriedadeController> _logger;
+        private readonly ICulturaService _culturaService;
+        private readonly ILogger<CulturaController> _logger;
 
-        public TalhaoController(ITalhaoService talhaoService, ILogger<PropriedadeController> logger)
+        public CulturaController(ICulturaService culturaService, ILogger<CulturaController> logger)
         {
-            _talhaoService = talhaoService;
+            _culturaService = culturaService;
             _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TalhaoResponse>>> GetAll()
+        public async Task<ActionResult<List<CulturaResponse>>> GetAll()
         {
             try
             {
-                var result = await _talhaoService.GetAllAsync();
+                var result = await _culturaService.GetAllAsync();
 
                 if (result is not null)
                 {
@@ -36,17 +35,17 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching talhões.");
+                _logger.LogError(ex, "Error fetching cultura.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
-        [HttpGet("{talhaoId}")]
-        public async Task<ActionResult<List<TalhaoResponse>>> GetById(Guid talhaoId)
+        [HttpGet("{propriedadeId}")]
+        public async Task<ActionResult<List<CulturaResponse>>> GetById(Guid propriedadeId)
         {
             try
             {
-                var result = await _talhaoService.GetByIdAsync(talhaoId);
+                var result = await _culturaService.GetByIdAsync(propriedadeId);
 
                 if (result is not null)
                 {
@@ -57,13 +56,13 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error fetching talhão.");
+                _logger.LogError(ex, "Error fetching cultura.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult<TalhaoResponse>> Add([FromBody] CreateTalhaoRequest request)
+        public async Task<ActionResult<CulturaResponse>> Add([FromBody] CreateCulturaRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +71,7 @@ namespace Propriedades.Api.Controllers
 
             try
             {
-                var result = await _talhaoService.AddAsync(request);
+                var result = await _culturaService.AddAsync(request);
 
                 if (result is not null)
                 {
@@ -83,13 +82,13 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing talhão add.");
+                _logger.LogError(ex, "Error processing cultura add.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
         [HttpPut]
-        public async Task<ActionResult<PropriedadeResponse>> Update([FromBody] UpdateTalhaoRequest request)
+        public async Task<ActionResult<CulturaResponse>> Update([FromBody] UpdateCulturaRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +97,7 @@ namespace Propriedades.Api.Controllers
 
             try
             {
-                var result = await _talhaoService.UpdateAsync(request);
+                var result = await _culturaService.UpdateAsync(request);
 
                 if (result is not null)
                 {
@@ -109,23 +108,23 @@ namespace Propriedades.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing talhão update.");
+                _logger.LogError(ex, "Error processing cultura update.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }
 
-        [HttpDelete("{talhaoId}")]
-        public async Task<ActionResult> Delete(Guid talhaoId)
+        [HttpDelete("{propriedadeId}")]
+        public async Task<ActionResult> Delete(Guid propriedadeId)
         {
             try
             {
-                await _talhaoService.DeleteAsync(talhaoId);
+                await _culturaService.DeleteAsync(propriedadeId);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing talhão delete.");
+                _logger.LogError(ex, "Error processing cultura delete.");
                 return StatusCode(500, "An error occurred while processing your request");
             }
         }

@@ -1,4 +1,4 @@
-﻿using Propriedades.Domain.Enums;
+﻿ using Propriedades.Domain.Enums;
 
 namespace Propriedades.Domain.Entities
 {
