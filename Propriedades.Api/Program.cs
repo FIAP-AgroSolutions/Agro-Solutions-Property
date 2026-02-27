@@ -22,7 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "FIAP - Propriedades", Version = "v1" });
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "FIAP AgroSolution - Propriedades", Version = "v1" });
 
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -53,8 +53,9 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 
 // Database
-builder.Services.AddDbContext<PropriedadesDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<PropriedadesDbContext>();
+//builder.Services.AddDbContext<PropriedadesDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Repositories
 builder.Services.AddScoped<IPropriedadeRepository, PropriedadeRepository>();
@@ -99,12 +100,13 @@ builder.Services.AddCors(options =>
 
 #region Health Check
 
-builder.Services.AddHealthChecks().AddSqlServer(
-    builder.Configuration.GetConnectionString("DbConnection")!,
-    name: "sqlserver",
-    failureStatus: HealthStatus.Unhealthy,
-    timeout: TimeSpan.FromSeconds(5)
-);
+builder.Services
+    .AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString("DbConnection")!,
+        name: "sqlserver",
+        failureStatus: HealthStatus.Unhealthy,
+        timeout: TimeSpan.FromSeconds(5));
 #endregion
 
 
@@ -117,7 +119,10 @@ var services = scope.ServiceProvider;
 
 using var context = services.GetRequiredService<PropriedadesDbContext>();
 
-context.Database.Migrate();
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}
 
 #endregion
 
@@ -130,21 +135,17 @@ app.MapHealthChecks("/health/live", new HealthCheckOptions
 
 app.MapHealthChecks("/health/ready", new HealthCheckOptions
 {
-    Predicate = check => check.Name == "sqlserver"
+    Predicate = check => check.Tags.Contains("ready")
 });
 #endregion
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FIAP - Propriedades V1");
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FIAP - Propriedades V1");
+});
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
