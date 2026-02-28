@@ -155,7 +155,7 @@ namespace Propriedades.Infrastructure.Migrations
                     b.ToTable("Talhoes", (string)null);
                 });
 
-            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafra", b =>
+            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafraCultura", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -202,7 +202,7 @@ namespace Propriedades.Infrastructure.Migrations
                     b.Navigation("Propriedade");
                 });
 
-            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafra", b =>
+            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafraCultura", b =>
                 {
                     b.HasOne("Propriedades.Domain.Entities.Cultura", "Cultura")
                         .WithMany("TalhoesSafra")

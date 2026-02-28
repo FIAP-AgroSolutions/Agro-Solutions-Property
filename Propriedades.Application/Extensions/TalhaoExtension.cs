@@ -12,6 +12,8 @@ namespace Propriedades.Application.Extensions
     {
         public static TalhaoResponse ToTalhaoResponse(this Talhao talhao)
         {
+            if (talhao is null) return null;
+
             return new TalhaoResponse
             {
                 Id = talhao.Id,

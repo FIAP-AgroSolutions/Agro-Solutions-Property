@@ -12,8 +12,8 @@ using Propriedades.Infrastructure.Data;
 namespace Propriedades.Infrastructure.Migrations
 {
     [DbContext(typeof(PropriedadesDbContext))]
-    [Migration("20260216003026_Initial")]
-    partial class Initial
+    [Migration("20260228001319_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,7 +158,7 @@ namespace Propriedades.Infrastructure.Migrations
                     b.ToTable("Talhoes", (string)null);
                 });
 
-            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafra", b =>
+            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafraCultura", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +205,7 @@ namespace Propriedades.Infrastructure.Migrations
                     b.Navigation("Propriedade");
                 });
 
-            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafra", b =>
+            modelBuilder.Entity("Propriedades.Domain.Entities.TalhaoSafraCultura", b =>
                 {
                     b.HasOne("Propriedades.Domain.Entities.Cultura", "Cultura")
                         .WithMany("TalhoesSafra")

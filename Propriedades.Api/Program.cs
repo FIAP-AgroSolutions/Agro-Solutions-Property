@@ -61,11 +61,15 @@ builder.Services.AddDbContext<PropriedadesDbContext>();
 builder.Services.AddScoped<IPropriedadeRepository, PropriedadeRepository>();
 builder.Services.AddScoped<ITalhaoRepository, TalhaoRepository>();
 builder.Services.AddScoped<ICulturaRepository, CulturaRepository>();
+builder.Services.AddScoped<ISafraRepository, SafraRepository>();
+builder.Services.AddScoped<ITalhaoSafraCulturaRepository, TalhaoSafraCulturaRepository>();
 
 // Services
 builder.Services.AddScoped<IPropriedadeService, PropriedadeService>();
 builder.Services.AddScoped<ITalhaoService, TalhaoService>();
 builder.Services.AddScoped<ICulturaService, CulturaService>();
+builder.Services.AddScoped<ISafraService, SafraService>();
+builder.Services.AddScoped<ITalhaoSafraCulturaService, TalhaoSafraCulturaService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

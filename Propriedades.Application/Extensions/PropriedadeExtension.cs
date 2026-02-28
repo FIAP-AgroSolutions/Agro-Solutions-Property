@@ -7,6 +7,8 @@ namespace Propriedades.Application.Extensions
     {
         public static PropriedadeResponse ToPropriedadeResponse(this Propriedade propriedade)
         {
+            if (propriedade is null) return null;
+
             return new PropriedadeResponse 
             {
                 Id = propriedade.Id,

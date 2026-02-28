@@ -7,6 +7,8 @@ namespace Propriedades.Application.Extensions
     {
         public static CulturaResponse ToCulturaResponse(this Cultura cultura)
         {
+            if (cultura is null) return null;
+
             return new CulturaResponse
             {
                 Id = cultura.Id,
